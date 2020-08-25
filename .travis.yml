@@ -1,0 +1,9 @@
+arch: ppc64le
+  
+dist: bionic
+sudo: required
+service: docker
+
+script:
+  - curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json
+  - docker run -t centos:7 bash -c 'yum install curl -y && curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json'
