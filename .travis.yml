@@ -5,5 +5,10 @@ sudo: required
 service: docker
 
 script:
-  - curl https://raw.githubusercontent.com/Siddhesh-Ghadi/travis-docker-mtu/master/.travis.yml
-  - docker run -t centos:7 bash -c 'curl https://raw.githubusercontent.com/Siddhesh-Ghadi/travis-docker-mtu/master/.travis.yml'
+  - ifconfig
+  - sudo systemctl stop docker
+  - sudo cat /etc/docker/daemon.json
+  - sudo sed -i 's/1460/1300/g' /etc/docker/daemon.json
+  - sudo systemctl start docker
+  - curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json
+  - docker run -t centos:7 bash -c 'curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json'
