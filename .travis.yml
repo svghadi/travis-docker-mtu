@@ -5,6 +5,7 @@ sudo: required
 service: docker
 
 script:
+  - who am i
   - #sudo systemctl stop docker
   - #sudo sed -i 's/1460/1300/g' /etc/docker/daemon.json
   - #sudo systemctl start docker
