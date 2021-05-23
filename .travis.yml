@@ -9,11 +9,12 @@ script:
   - tty
   - #sudo systemctl stop docker
   - #sudo sed -i 's/1460/1300/g' /etc/docker/daemon.json
-  - #sudo systemctl start docker {"registry-mirrors": ["https://mirror.gcr.io"],"mtu": 1450}
+  - #sudo systemctl start docker
   - ifconfig
   - sudo cat /etc/docker/daemon.json
-  - echo '{\"mtu\"\: 1450}'|sudo tee /etc/docker/daemon.json
-  - sudo cat /etc/docker/daemon.json
+  - echo '{"mtu": 1450}' > daemon.json
+  - cat daemon.json
+  - sudo mv -f daemon.json /etc/docker/daemon.json
   - sudo systemctl restart docker
   - docker --version
   - curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json > log.txt
