@@ -12,6 +12,9 @@ script:
   - #sudo systemctl start docker
   - ifconfig
   - sudo cat /etc/docker/daemon.json
+  - sudo sed -i '2s/$/,\n  "mtu": 1460/' /etc/docker/daemon.json
+  - sudo cat /etc/docker/daemon.json
+  - sudo systemctl restart docker
   - docker --version
   - curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json > log.txt
   - curl http://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/ppc64le/kubectl > log1.txt
