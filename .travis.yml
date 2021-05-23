@@ -12,7 +12,7 @@ script:
   - #sudo systemctl start docker
   - ifconfig
   - sudo cat /etc/docker/daemon.json
-  - sudo echo '{"registry-mirrors": ["https://mirror.gcr.io"],"mtu": 1450}' > /etc/docker/daemon.json
+  - #sudo echo '{"registry-mirrors": ["https://mirror.gcr.io"],"mtu": 1450}' > /etc/docker/daemon.json
   - sudo cat /etc/docker/daemon.json
   - sudo systemctl restart docker
   - docker --version
