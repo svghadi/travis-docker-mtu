@@ -9,10 +9,10 @@ script:
   - tty
   - #sudo systemctl stop docker
   - #sudo sed -i 's/1460/1300/g' /etc/docker/daemon.json
-  - #sudo systemctl start docker
+  - #sudo systemctl start docker {"registry-mirrors": ["https://mirror.gcr.io"],"mtu": 1450}
   - ifconfig
   - sudo cat /etc/docker/daemon.json
-  - echo 's'|sudo tee /etc/docker/daemon.json
+  - echo '{}'|sudo tee /etc/docker/daemon.json
   - sudo cat /etc/docker/daemon.json
   - sudo systemctl restart docker
   - docker --version
