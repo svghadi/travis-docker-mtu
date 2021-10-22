@@ -2,7 +2,7 @@ arch: ppc64le
   
 dist: focal
 sudo: required
-service: docker
+#service: docker
 
 script:
   #- tty
