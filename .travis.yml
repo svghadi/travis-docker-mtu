@@ -9,9 +9,9 @@ script:
   - #sudo systemctl stop docker
   - #sudo sed -i 's/1460/1300/g' /etc/docker/daemon.json
   - #sudo systemctl start docker
-  - ifconfig
+  - ip addr
   - cat /etc/docker/daemon.json
-  - docker run -t centos:7 bash -c 'ifconfig'
+  - docker run -t centos:7 bash -c 'ip addr'
   #- curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json > log.txt
   #- curl http://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/ppc64le/kubectl > log1.txt
   #- docker run -t centos:7 bash -c 'curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json > log.txt; curl http://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/ppc64le/kubectl > log1.txt'
