@@ -1,29 +1,52 @@
 
-dist: focal
-
 service: docker
 
 script:
-  - sudo apt update -qqy && sudo apt-get install net-tools -qqy
+  - sudo apt update -y &> /dev/null && sudo apt-get install net-tools -y &> /dev/null
+  - echo "MTU ON HOST"
   - ifconfig
-  - docker pull ubuntu:latest &> /dev/null
-  - docker run -t ubuntu:latest bash -c "apt update -qqy && apt-get install net-tools -qqy && ifconfig"
+  - docker pull alpine:latest &> /dev/null
+  - echo "MTU INSIDE DOCKER CONTAINER"
+  - docker run -t alpine:latest ifconfig
   - sudo cat /etc/docker/daemon.json
-  #- #sudo systemctl stop docker
-  #- #sudo sed -i 's/1460/1300/g' /etc/docker/daemon.json
-  #- #sudo systemctl start docker
+  #- sudo systemctl stop docker
+  #- sudo sed -i 's/1460/1300/g' /etc/docker/daemon.json
+  #- sudo systemctl start docker
   #- ip addr
-  #- cat /etc/docker/daemon.json
-  #- docker run -t registry.access.redhat.com/ubi8:8.4 bash -c 'yum install -y iproute && ip addr'
-  #- curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json > log.txt
-  #- curl http://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/ppc64le/kubectl > log1.txt
-  #- docker run -t centos:7 bash -c 'curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json > log.txt; curl http://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/ppc64le/kubectl > log1.txt'
+  - docker pull centos:7 &> /dev/null
+  - echo "TESTING DOWNLOAD"
+  - echo "ON HOST"
+  - curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json > log.txt
+  - curl http://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/ppc64le/kubectl > log1.txt
+  - echo "INSIDE CONTAINER"
+  - docker run -t centos:7 bash -c 'curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json > log.txt; curl http://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/ppc64le/kubectl > log1.txt'
 
 jobs:
   include:
-    - env: ENV=AMD64
+    - env: ENV=intel-focal
       arch: amd64
-    - env: ENV=PPC64LE
+      dist: focal
+    - env: ENV=power-focal
       arch: ppc64le
-    - env: ENV=S390X
+      dist: focal
+    - env: ENV=system-z-focal
       arch: s390x
+      dist: focal
+    - env: ENV=intel-bionic
+      arch: amd64
+      dist: bionic
+    - env: ENV=power-bionic
+      arch: ppc64le
+      dist: bionic
+    - env: ENV=system-z-bionic
+      arch: s390x
+      dist: bionic
+    - env: ENV=intel-xenial
+      arch: amd64
+      dist: xenial
+    - env: ENV=power-xenial
+      arch: ppc64le
+      dist: xenial
+    - env: ENV=system-z-xenial
+      arch: s390x
+      dist: xenial
