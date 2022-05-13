@@ -13,13 +13,13 @@ script:
   #- sudo sed -i 's/1460/1300/g' /etc/docker/daemon.json
   #- sudo systemctl start docker
   #- ip addr
-  - docker pull centos:7 &> /dev/null
+  - docker pull registry.access.redhat.com/ubi8:8.5 &> /dev/null
   - echo "TESTING DOWNLOAD"
   - echo "ON HOST"
   - curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json > log.txt
   - curl http://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/ppc64le/kubectl > log1.txt
   - echo "INSIDE CONTAINER"
-  - docker run -t centos:7 bash -c 'curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json > log.txt; curl http://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/ppc64le/kubectl > log1.txt'
+  - docker run -t registry.access.redhat.com/ubi8:8.5 bash -c 'curl https://public.dhe.ibm.com/ibmdl/export/pub/software/server/ibm-ai/conda/linux-ppc64le/current_repodata.json > log.txt; curl http://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/ppc64le/kubectl > log1.txt'
 
 jobs:
   include:
