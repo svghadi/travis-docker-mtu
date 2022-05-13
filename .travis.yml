@@ -7,7 +7,7 @@ script:
   - sudo apt update -qqy && sudo apt-get install net-tools -qqy
   - ifconfig
   - docker pull ubuntu:latest &> /dev/null
-  - docker run -t ubuntu:latest bash -c "apt update -qqy && apt-get install net-tools -qqy & ifconfig"
+  - docker run -t ubuntu:latest bash -c "apt update -qqy && apt-get install net-tools -qqy && ifconfig"
   - sudo cat /etc/docker/daemon.json
   #- #sudo systemctl stop docker
   #- #sudo sed -i 's/1460/1300/g' /etc/docker/daemon.json
@@ -21,9 +21,9 @@ script:
 
 jobs:
   include:
-    - env: AMD64
+    - env: ENV=AMD64
       arch: amd64
-    - env: PPC64LE
+    - env: ENV=PPC64LE
       arch: ppc64le
-    - env: S390X
+    - env: ENV=S390X
       arch: s390x
