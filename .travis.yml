@@ -4,9 +4,10 @@ dist: focal
 service: docker
 
 script:
-  - ip addr
+  - sudo apt update -qqy && sudo apt-get install net-tools -qqy
+  - ifconfig
   - docker pull ubuntu:latest &> /dev/null
-  - docker run -t ubuntu:latest bash -c "ip addr"
+  - docker run -t ubuntu:latest bash -c "apt update -qqy && apt-get install net-tools -qqy & ifconfig"
   - sudo cat /etc/docker/daemon.json
   #- #sudo systemctl stop docker
   #- #sudo sed -i 's/1460/1300/g' /etc/docker/daemon.json
